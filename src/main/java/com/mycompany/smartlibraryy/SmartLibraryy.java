@@ -11,6 +11,31 @@ import java.util.Scanner;
  */
 public class SmartLibraryy {
     
+    public static void cariBuku(String judul, Buku[] daftarBuku, int jumlahBuku){
+        System.out.println("Mencari buku dengan Judul: " + judul);
+        boolean ditemukan = false;
+        for (int i = 0; i < jumlahBuku; i++){
+            if (daftarBuku[i].getJudul().equalsIgnoreCase(judul)){
+                System.out.print("- ditemukan: ");
+                ditemukan = true;
+            }
+        }
+        if (!ditemukan) System.out.println("Buku tidak ditemukan.");
+    }
+    
+    public static void cariBuku(int tahunTerbit, Buku[] daftarBuku, int jumlahBuku){
+        System.out.println("Mencari buku dengan Tahun Terbit: " + tahunTerbit);
+        boolean ditemukan = false;
+        for (int i = 0; i < jumlahBuku; i++){
+            if (daftarBuku[i].getTahunTerbit() == tahunTerbit){
+                System.out.print("- ditemukan: ");
+                daftarBuku[i].tampilkanInfoBuku();
+                ditemukan = true;
+            }
+        }
+        if (!ditemukan) System.out.println("Buku tidak ditemukan.");
+    }
+    
     public static void main(String[] args){
         Scanner scanner = new Scanner(System.in);
         
@@ -35,7 +60,7 @@ public class SmartLibraryy {
             scanner.nextLine();
             
             switch(pilihan){
-                case 1 -> {
+                case 1:
                     if (jumlahBuku < daftarBuku.length){
                         System.out.println("\n-- Form Tambah Buku --");
                         
@@ -58,8 +83,9 @@ public class SmartLibraryy {
                     } else {
                         System.out.println("Maaf, kapasitas rak buku sudah penuh!");
                     }
-                }
-                case 2 -> {
+                    scanner.nextLine();
+                break;
+                case 2:
                     System.out.println("\n--- Daftar Buku di Perpustakaan ---");
                     if (jumlahBuku == 0){
                         System.out.println("Belum ada buku yang tersimpan");
@@ -69,16 +95,38 @@ public class SmartLibraryy {
                             
                             daftarBuku[i].tampilkanInfoBuku();
                         }
+                        System.out.println("\n* Total Buku Fisik yang Terdaftar:" + Buku.totalBukuBerhasilDibuat);
                     }
-                }
-                case 3 -> { 
+                    System.out.print("Tekan Enter untuk melanjutkan...");
+                    scanner.nextLine();
+                break;
+                case 3:
+                    System.out.println("\n-- Fitur Cari Buku --");
+                    System.out.println("\1. Cari berdasarkan Judul");
+                    System.out.println("2. Cari berdasarkan Tahun");
+                    System.out.println("Pilih (1/2): ");
+                    int modeCari = scanner.nextInt();
+                    scanner.nextLine();
+                    
+                    if (modeCari == 1){
+                        System.out.print("Masukan Judul: ");
+                        String kataKunci = scanner.nextLine();
+                        cariBuku(kataKunci, daftarBuku, jumlahBuku);
+                    } else if (modeCari == 2){
+                        System.out.print("Masukan Tahun: ");
+                        int angkaKunci = scanner.nextInt();
+                        scanner.nextInt();
+                        cariBuku(angkaKunci, daftarBuku, jumlahBuku);
+                    } else {
+                        System.out.println("Pilihan tidak Valid.");
+                    }
+                    System.out.print("Tekan Enter untuk melanjutkan...");
+                    scanner.nextLine();
+                break;
+                case 4:
                     System.out.println("Terima kasih telah menggunakan Smart Library!");
                     isRunning = false;
-                }
-                default -> { 
-                    System.out.println("Pilihan tidak valid. silahkan masukan angka 1-3.");
-                    scanner.nextLine();
-                }
+                
             }
         }
     }
