@@ -11,7 +11,7 @@ package com.mycompany.smartlibraryy;
 public class BukuCetak extends Koleksi {
     private int jumlahHalaman;
 
-    public BukuCetak(String judul, String pengarang, int tahunTerbit) {
+    public BukuCetak(String judul, String pengarang, int tahunTerbit, int halaman) {
         super(judul, pengarang, tahunTerbit);
         this.jumlahHalaman = jumlahHalaman;
     }
